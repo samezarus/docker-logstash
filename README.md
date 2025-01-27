@@ -1,1 +1,5 @@
-# docker-logstash
+# Инстанс Logstash для отправки логов в удалённый Elastic
+
+## Переименовать и сконфигурировать .env
+
+.env.example -> .env

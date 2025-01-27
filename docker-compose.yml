@@ -1,0 +1,19 @@
+services:
+
+  logstash:
+    build:
+      context: logstash/
+      args:
+        ELASTIC_VERSION: ${ELASTIC_VERSION}
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+      # Определяем папки с логами ...
+      - ~/LOGS/:/LOGS:ro
+    environment:
+      LS_JAVA_OPTS: -Xms256m -Xmx256m
+      # remote elastic auth
+      REM_ELASTIC_HOST: ${REM_ELASTIC_HOST}
+      REM_ELASTIC_LOGIN: ${REM_ELASTIC_LOGIN}
+      REM_ELASTIC_PASSWORD: ${REM_ELASTIC_PASSWORD}
+    restart: unless-stopped
